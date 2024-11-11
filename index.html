@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Científica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f1f1f1;
+        }
+        .calculator {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        input[type="text"] {
+            width: 240px;
+            height: 40px;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+            text-align: right;
+            padding-right: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+        .button {
+            width: 60px;
+            height: 60px;
+            font-size: 1.2em;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #e0e0e0;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+        }
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+        }
+        .button:active {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <input type="text" id="result" disabled>
+        <div class="button-row">
+            <button class="button" onclick="clearScreen()">C</button>
+            <button class="button" onclick="deleteLast()">Del</button>
+            <button class="button" onclick="insert('(')"> ( </button>
+            <button class="button" onclick="insert(')')"> ) </button>
+        </div>
+        <div class="button-row">
+            <button class="button" onclick="insert('7')">7</button>
+            <button class="button" onclick="insert('8')">8</button>
+            <button class="button" onclick="insert('9')">9</button>
+            <button class="button" onclick="insert('/')">/</button>
+        </div>
+        <div class="button-row">
+            <button class="button" onclick="insert('4')">4</button>
+            <button class="button" onclick="insert('5')">5</button>
+            <button class="button" onclick="insert('6')">6</button>
+            <button class="button" onclick="insert('*')">x</button>
+        </div>
+        <div class="button-row">
+            <button class="button" onclick="insert('1')">1</button>
+            <button class="button" onclick="insert('2')">2</button>
+            <button class="button" onclick="insert('3')">3</button>
+            <button class="button" onclick="insert('-')">-</button>
+        </div>
+        <div class="button-row">
+            <button class="button" onclick="insert('0')">0</button>
+            <button class="button" onclick="insert('.')">.</button>
+            <button class="button" onclick="calculate()">=</button>
+            <button class="button" onclick="insert('+')">+</button>
+        </div>
+        <div class="button-row">
+            <button class="button" onclick="insert('Math.sin(')">sin</button>
+            <button class="button" onclick="insert('Math.cos(')">cos</button>
+            <button class="button" onclick="insert('Math.tan(')">tan</button>
+            <button class="button" onclick="insert('Math.log10(')">log</button>
+        </div>
+        <div class="button-row">
+            <button class="button" onclick="insert('Math.exp(')">exp</button>
+            <button class="button" onclick="insert('Math.sqrt(')">√</button>
+            <button class="button" onclick="insert('Math.pow(')">x^y</button>
+            <button class="button" onclick="insert('Math.PI')">π</button>
+        </div>
+        <div class="button-row">
+            <button class="button" onclick = "insert(',')">,</button>
+        </div>
+    </div>
+
+    <script>
+        function insert(num) {
+            document.getElementById('result').value += num;
+        }
+
+        function clearScreen() {
+            document.getElementById('result').value = '';
+        }
+
+        function deleteLast() {
+            let exp = document.getElementById('result').value;
+            document.getElementById('result').value = exp.substring(0, exp.length - 1);
+        }
+
+        function calculate() {
+            let exp = document.getElementById('result').value;
+            try {
+                document.getElementById('result').value = eval(exp);
+            } catch (e) {
+                document.getElementById('result').value = 'Error';
+            }
+        }
+    </script>
+
+</body>
+</html>
